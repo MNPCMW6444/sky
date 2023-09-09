@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {createRoot} from 'react-dom/client';
 import {Map} from 'react-map-gl';
-import maplibregl from 'maplibre-gl';
-import DeckGL from '@deck.gl/react';
-import {ScenegraphLayer} from '@deck.gl/mesh-layers';
+import DeckGL from '@deck.gl/react/typed';
+import {ScenegraphLayer} from '@deck.gl/mesh-layers/typed';
 
-// Data provided by the OpenSky Network, http://www.opensky-network.org
 const DATA_URL = 'https://opensky-network.org/api/states/all';
 const MODEL_URL =
     'https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/scenegraph-layer/airplane.glb';
@@ -40,14 +37,14 @@ const DATA_INDEX = {
   POSITION_SOURCE: 16
 };
 
-function verticalRateToAngle(object) {
+function verticalRateToAngle(object:any) {
   // Return: -90 looking up, +90 looking down
   const verticalRate = object[DATA_INDEX.VERTICAL_RATE] || 0;
   const velocity = object[DATA_INDEX.VELOCITY] || 0;
   return (-Math.atan2(verticalRate, velocity) * 180) / Math.PI;
 }
 
-function getTooltip({object}) {
+function getTooltip({object}:any) {
   return (
       object &&
       `\
@@ -59,7 +56,7 @@ function getTooltip({object}) {
   );
 }
 
-export default function App({sizeScale = 25, onDataLoad, mapStyle = MAP_STYLE}) {
+const App=({sizeScale = 25, onDataLoad, mapStyle = MAP_STYLE}:any) =>{
   const [data, setData] = useState<any>(null);
   const [timer, setTimer] = useState<any>({});
 
@@ -124,11 +121,11 @@ export default function App({sizeScale = 25, onDataLoad, mapStyle = MAP_STYLE}) 
           controller={true}
           getTooltip={getTooltip}
       >
-        <Map reuseMaps mapLib={maplibregl} mapStyle={mapStyle} preventStyleDiffing={true} />
+        <Map reuseMaps mapStyle={mapStyle} />
       </DeckGL>
   );
 }
 
-export function renderToDOM(container) {
-  createRoot(container).render(<App />);
-}
+
+
+export  default App
