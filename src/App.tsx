@@ -99,7 +99,7 @@ const App = ({sizeScale = 25, onDataLoad, mapStyle = MAP_STYLE}: AppProps) => {
             clearTimeout(timer.nextTimeoutId);
             timer.id = null;
         };
-    }, [timer]);
+    }, [timer, data, onDataLoad]);
 
     const layer =
         data &&
