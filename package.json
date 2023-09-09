@@ -17,7 +17,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "clean": "rm -rf build node_modules package-lock.json",
+    "dev": "react-scripts start",
+    "start": "npm run clean && npm i && npm run dev",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
